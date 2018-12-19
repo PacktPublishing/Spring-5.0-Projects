@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="2_linksshr" default="explode" >
+
+	<target name="explode">
+		<copy todir="target/${ant.project.name}" >
+			<fileset dir="src/main/webapp">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+
+		<copy todir="target/${ant.project.name}" overwrite="true">
+			<fileset dir="src/main/webapp">
+				<include name="**/*.html" />
+			</fileset>
+		</copy>
+
+	</target>
+</project>

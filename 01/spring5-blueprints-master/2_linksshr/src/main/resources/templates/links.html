@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{base}"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<title>Links</title>
+</head>
+
+<div layout:fragment="page_content" id="page_content" v-cloak>
+	<br/>
+	<div class="row">
+		<div class="col-md-8">
+			<h1 class="page-header" v-once>
+				Links
+				<span class="pull-right" th:text="${username}">
+				replaced
+				</span>
+				<th:block sec:authorize="isAuthenticated()">
+					<button id="new-link-btn" class="btn btn-success pull-right"
+						data-toggle="modal" data-target="#linksModal" >
+						<i class="fa fa-plus"></i> New Link
+					</button>
+				</th:block>	
+				<th:block sec:authorize="not isAuthenticated()">
+					<button id="new-link-btn" class="btn btn-success pull-right disabled"
+						title="Login to create new link!">
+						<i class="fa fa-plus"></i> New Link
+					</button>
+				</th:block>	
+				
+			</h1>
+			<div class="row">
+				<div class="col-md-12 input-group">
+					<input type="text" class="filter form-control" id="search_f"
+						th:value="${param.search}" name="search" placeholder="Search in title, link, description" />
+					<button id="searchBtn" class="btn btn-primary btn-sm">
+						<i class="fa fa-search"></i> Search
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4" v-once>
+			<h1 class="page-header">Filters</h1>
+		</div>
+	</div>
+	<div class="modal fade" id="linksModal" tabindex="-1" role="dialog"
+		aria-labelledby="linksModal" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">New Link</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" id="new-link-form">
+						<div class="form-group">
+							<label class="control-label required">Title</label>
+							<input type="text" class="form-control required" 
+								name="title" v-model="newLink.title" />
+						</div>
+						<div class="form-group">
+							<label class="control-label">URL</label>
+							<input type="url" class="form-control required" 
+								name="url" v-model="newLink.url" />
+						</div>
+						<div class="form-group">
+							<label class="control-label">Description</label>
+							<textarea v-model="newLink.description" class="form-control" name="description"></textarea>
+						</div>
+						<div class="form-group">
+							<label class="control-label">Category</label>
+							<input type="text" class="form-control required"
+								name="category" v-model="newLink.category" />
+						</div>
+						<div class="form-group justify-content-end">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary" id="save-link" v-on:click="saveLink">Save changes</button>
+						</div>	
+					</form>
+				</div>
+				<div class="modal-footer">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<th:block layout:fragment="scripts">
+	<script th:src="@{/static/js/links.js}"></script>
+	
+	<script id="new-link-template" type="text/html">
+		
+	</script>
+</th:block>
+</html>
