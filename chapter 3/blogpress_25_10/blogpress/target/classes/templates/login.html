@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="header :: jscssinclude"></head>
+
+<body>
+    <div th:replace="header :: header_navigation"></div>
+	<div class="container blogpress-section">
+		<div th:if="${error !=null}">
+			<div class="alert alert-danger" role="alert">
+				Invalid credentials
+			</div>
+		</div>
+	    <div th:if="${message !=null}">
+	    	<div class="alert alert-success" role="alert">
+				Successfully logged out
+			</div>
+	    </div>
+	    <form th:action="@{/login}" method="post" class="needs-validation" id="loginForm">
+	      <div class="form-row">
+	       <div class="col-md-4 mb-3">
+		   		<label for="username">Username</label>
+		    	<input type="text" name="username" class="form-control" id="username" placeholder="Username" required>
+	        	<div class="invalid-feedback">Please enter valid Username</div>
+		  	</div>
+		  </div>
+		  <div class="form-row">
+		  	<div class="col-md-4 mb-3">	
+			    <label for="password">Password</label>
+			    <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
+		        <div class="invalid-feedback">Oh! you missed it</div>
+		  	</div>
+		  </div>	
+	  	  <button type="submit" class="btn btn-primary" id="btnLogin">Login</button>
+	    </form>
+    </div>
+    <script type="text/javascript">
+	    $("#btnLogin").click(function(event) {
+	    	fireFormValidation($("#loginForm"));
+		});
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+.blogpress-section{
+    margin: 1.5rem;
+    padding: 1.5rem;
+    margin-right: 0;
+    margin-left: 0;
+    border-width: .2rem;
+    position: relative;
+    border: solid #f8f9fa;
+}
+
+.comment-reply{
+	margin: 1.5rem;
+}

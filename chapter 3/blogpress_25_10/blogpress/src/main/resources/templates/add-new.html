@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="header :: jscssinclude"></head>
+
+<body>
+    <div th:replace="header :: header_navigation"></div>
+    <div class="container">
+	    <form th:action="@{/addNewBlog}" method="post" class="needs-validation" id="addNewBlogForm">
+			<div class="form-row">
+			 	<div class="col-md-12 mb-3">
+			        <label class="form-control-label" for="title">Blog Title</label>
+			        <input type="text" class="form-control" name="title" id="title" required>
+			        <div class="valid-feedback">Success! You've done it.</div>
+			        <div class="invalid-feedback">No, you missed this one.</div>
+		        </div>
+		    </div>
+		    <div class="form-row">
+		    	<div class="col-md-12 mb-3">
+			        <label class="form-control-label" for="body">Blog content</label>
+			        <textarea class="form-control" name="body" id="body" cols="20" rows="10" required></textarea>
+			        <div class="valid-feedback">Nice! You got this one!</div>
+			        <div class="invalid-feedback">Sorry, you missed this one.</div>
+		        </div>
+		    </div>
+		    <div>
+		        <button type="submit" class="btn btn-secondary" id="btnCreateBlog">Create Blog!</button>
+		    </div>
+	    </form>
+    </div>
+	<script type="text/javascript">
+	    $("#btnCreateBlog").click(function(event) {
+	    	fireFormValidation($("#addNewBlogForm"));
+		});
+	</script>
+</body>
+
+</html>
