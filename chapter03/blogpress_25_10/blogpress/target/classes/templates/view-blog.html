@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head th:replace="header :: jscssinclude"></head>
+	<body>
+	
+		<div th:replace="header :: header_navigation"></div>
+	    <div class="container">
+	    	<div class="blogpress-section">
+				<div class="form-row">
+				 	<div class="col-md-12 mb-3" th:if="${blog !=null}">
+			        	<p class="text-left display-4" th:text="${blog.title}">This is blog title</p>
+			        	<p class="text-sm-left font-weight-light">By <span th:text="${blog.createdBy}"> createdBy</span> comments: 23	 Published on <span th:text="${blog.publishDateForDisplay}">published Date</span></p>
+			        </div>
+			    </div>
+			    <div class="form-row">
+				 	<div class="col-md-12 mb-3" th:if="${blog !=null}">
+			        	<p class="text-left" th:text="${blog.body}">This is blog content</p>
+			        </div>
+			    </div>
+				<div class="form-row blogpress-section" th:if="${blog.comments !=null}">
+					<div>
+					    <h4><b> <span th:text="${blog.comments.size()}">0</span> Comments - <a href="#commentSection">Write Comment</a></b></h4>
+					</div>
+				 	<div class="col-md-12 mb-3">
+				 		<th:block th:each="comment : ${blog.comments}">
+					 		<div class="card bg-white mb-3">
+					 			<div class="card-header">
+					 				<blockquote class="blockquote">
+					 					<div class="clearfix">
+								  			<p class="mb-0">
+								  				<span class="float-left" th:text="${comment.user}">username</span>
+								  				<span class="float-right"><button type="button" th:id="${comment.id}" class="btn replyComment">Reply</button></span>
+								  			</p>
+								  		</div>
+								  		<footer class="blockquote-footer"><span th:text="${comment.createdDateForDisplay}">created on</span></footer>
+									</blockquote>
+					 			</div>
+						   		<div class="card-body">
+									<p class="card-text" th:text="${comment.commentText}">comment</p>
+						   		</div>
+						   		<div class="form-row blogpress-section bg-light d-none comment-reply" th:id="'reply-' + ${comment.id}">
+								 	<div>
+									    <span><h4><b>Reply</b></h4></span><h4><b><span><button type="button" class="btn cancelComment" th:id="${comment.id}"> Cancel</button></span></b></h4>
+									</div>
+								 	<div class="col-md-12 mb-3">
+								 		<form th:action="@{/addComment}" method="post" class="needs-validation" id="addCommentForm">
+								 			<input type="hidden" name="blogId" th:value="${blog.id}" >
+								 			<input type="hidden" name="currentLevel" th:value="${comment.level}" >
+								 			<input type="hidden" name="parentId" th:value="${comment.id}" >
+								 			<input type="hidden" name="parentPosition" th:value="${comment.position}" >
+									 		<div class="form-row">
+											 	<div class="col-md-12 mb-3">
+											        <label class="form-control-label" for="name">Name</label>
+											        <input type="text" class="form-control" name="name" id="name" required>
+											        <div class="invalid-feedback">Please provide Name</div>
+										        </div>
+										    </div>
+										    <div class="form-row">
+										    	<div class="col-md-12 mb-3">
+											        <label class="form-control-label" for="email">Email</label>
+											        <input type="email" class="form-control" name="email" id="email" required>
+											        <div class="invalid-feedback">Please provide valid Email</div>
+										        </div>
+										    </div>
+										    <div class="form-row">
+										    	<div class="col-md-12 mb-3">
+											        <label class="form-control-label" for="comment">Comment</label>
+											        <textarea class="form-control" name="comment" id="comment" cols="20" rows="10" required></textarea>
+											        <div class="invalid-feedback">Please provide Comment.</div>
+										        </div>
+										    </div>
+										    <div>
+										        <button type="submit" class="btn btn-secondary btnAddComment">Add Comment!</button>
+										    </div>
+									    </form>
+								 	</div>
+								 </div>
+					 		</div>
+				 		</th:block>
+				 	</div>
+				 </div>
+				 <div class="form-row blogpress-section bg-light">
+				 	<div>
+					    <h4><b>Post Comment</b></h4>
+					</div>
+				 	<div class="col-md-12 mb-3" id="commentSection">
+				 		<form th:action="@{/addComment}" method="post" class="needs-validation" id="addCommentForm">
+				 			<input type="hidden" name="blogId" th:value="${blog.id}" >
+				 			<!-- <input type="hidden" name="currentLevel" value="0"> -->
+					 		<div class="form-row">
+							 	<div class="col-md-12 mb-3">
+							        <label class="form-control-label" for="name">Name</label>
+							        <input type="text" class="form-control" name="name" id="name" required>
+							        <div class="invalid-feedback">Please provide Name</div>
+						        </div>
+						    </div>
+						    <div class="form-row">
+						    	<div class="col-md-12 mb-3">
+							        <label class="form-control-label" for="email">Email</label>
+							        <input type="email" class="form-control" name="email" id="email" required>
+							        <div class="invalid-feedback">Please provide valid Email</div>
+						        </div>
+						    </div>
+						    <div class="form-row">
+						    	<div class="col-md-12 mb-3">
+							        <label class="form-control-label" for="comment">Comment</label>
+							        <textarea class="form-control" name="comment" id="comment" cols="20" rows="10" required></textarea>
+							        <div class="invalid-feedback">Please provide Comment.</div>
+						        </div>
+						    </div>
+						    <div>
+						        <button type="submit" class="btn btn-secondary btnAddComment">Add Comment!</button>
+						    </div>
+					    </form>
+				 	</div>
+				 </div>
+			 </div>
+	    </div>
+	    <script type="text/javascript">
+		    $(".btnAddComment").click(function(event) {
+		    	fireFormValidation($(this).parent().parent());
+			});
+		    $(".replyComment").click(function(event){
+		    	var replySecId = "#reply-"+$(this).attr("id");
+		    	if($(replySecId).hasClass("d-none")){
+		    		$(replySecId).removeClass("d-none");
+		    	}
+		    });
+		    
+		    $(".cancelComment").click(function(event){
+		    	var replySecId = "#reply-"+$(this).attr("id");
+		    	if(!$(replySecId).hasClass("d-none")){
+		    		$(replySecId).addClass("d-none");
+		    	}
+		    });
+		    
+		</script>
+	</body>
+
+</html>
