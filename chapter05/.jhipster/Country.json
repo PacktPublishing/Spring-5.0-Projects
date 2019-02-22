@@ -1,0 +1,99 @@
+{
+    "name": "Country",
+    "fields": [
+        {
+            "fieldName": "code",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 3
+        },
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 52
+        },
+        {
+            "fieldName": "continent",
+            "fieldType": "Continent",
+            "fieldValues": "ASIA,EUROPE,NORTH_AMERICA,AFRICA,OCEANIA,ANTARCTICA,SOUTH_AMERICA",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "region",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 26
+        },
+        {
+            "fieldName": "surfaceArea",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "population",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "lifeExpectancy",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "localName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 45
+        },
+        {
+            "fieldName": "governmentForm",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 45
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "city",
+            "otherEntityName": "city",
+            "otherEntityRelationshipName": "country"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "countryLanguage",
+            "otherEntityName": "countryLanguage",
+            "otherEntityRelationshipName": "country"
+        }
+    ],
+    "changelogDate": "20181220143638",
+    "entityTableName": "country",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

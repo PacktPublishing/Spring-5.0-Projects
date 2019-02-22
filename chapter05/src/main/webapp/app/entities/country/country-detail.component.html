@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="country">
+            <h2><span jhiTranslate="gdpApp.country.detail.title">Country</span> {{country.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="gdpApp.country.code">Code</span></dt>
+                <dd>
+                    <span>{{country.code}}</span>
+                </dd>
+                <dt><span jhiTranslate="gdpApp.country.name">Name</span></dt>
+                <dd>
+                    <span>{{country.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="gdpApp.country.continent">Continent</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'gdpApp.Continent.' + country.continent}}">{{country.continent}}</span>
+                </dd>
+                <dt><span jhiTranslate="gdpApp.country.region">Region</span></dt>
+                <dd>
+                    <span>{{country.region}}</span>
+                </dd>
+                <dt><span jhiTranslate="gdpApp.country.surfaceArea">Surface Area</span></dt>
+                <dd>
+                    <span>{{country.surfaceArea}}</span>
+                </dd>
+                <dt><span jhiTranslate="gdpApp.country.population">Population</span></dt>
+                <dd>
+                    <span>{{country.population}}</span>
+                </dd>
+                <dt><span jhiTranslate="gdpApp.country.lifeExpectancy">Life Expectancy</span></dt>
+                <dd>
+                    <span>{{country.lifeExpectancy}}</span>
+                </dd>
+                <dt><span jhiTranslate="gdpApp.country.localName">Local Name</span></dt>
+                <dd>
+                    <span>{{country.localName}}</span>
+                </dd>
+                <dt><span jhiTranslate="gdpApp.country.governmentForm">Government Form</span></dt>
+                <dd>
+                    <span>{{country.governmentForm}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/country', country.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

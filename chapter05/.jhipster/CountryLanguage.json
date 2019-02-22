@@ -1,0 +1,45 @@
+{
+    "name": "CountryLanguage",
+    "fields": [
+        {
+            "fieldName": "language",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "isOfficial",
+            "fieldType": "TrueFalse",
+            "fieldValues": "T,F",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "percentage",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "country",
+            "otherEntityName": "country",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20181220143640",
+    "entityTableName": "country_language",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
