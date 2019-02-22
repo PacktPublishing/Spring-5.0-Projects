@@ -1,0 +1,2 @@
+eclipse.preferences.version=1
+runtimes=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<runtimes>\r\n  <runtime id\="Pivotal tc Server Developer Edition (Runtime) v4.0" id-set\="true" location\="D\:/installed_software/spring_tool_suite/3.9.6/pivotal-tc-server" name\="Pivotal tc Server Developer Edition (Runtime) v4.0" runtime-type-id\="com.pivotal.server.tc.runtime.90" timestamp\="0"/>\r\n</runtimes>\r\n

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="header :: jscssinclude"></head>
+
+<body>
+    <div th:replace="header :: header_navigation">
+    </div>
+	<div class="container">
+		<div class="row">
+		<div class="col-sm-4" th:replace="control-menu :: control_navigation">
+		</div>
+		<div class="col-sm-8">
+			<span> Select any of the menu from left section for further actions ..!!</span>
+		</div>
+		</div>
+	</div>
+</body>
+
+</html>

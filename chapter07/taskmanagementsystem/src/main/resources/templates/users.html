@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="header :: jscssinclude"></head>
+    <body>
+        <div class="card bg-white mb-3">
+            <div class="card-body">
+                <div th:each="user: ${users}">
+                    <input type="hidden" name="userId" th:value="${user.id}">
+                    <input type="radio" name="userName" th:value="${user.firstname + ' ' +user.lastname}">
+                        <span th:text="${user.firstname + ' ' +user.lastname}">userfull name</span>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

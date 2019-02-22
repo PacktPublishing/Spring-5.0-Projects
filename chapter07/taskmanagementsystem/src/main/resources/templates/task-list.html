@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header :: jscssinclude"></head>
+    <body>
+    <div th:replace="header :: header_navigation"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3" th:replace="control-menu :: control_navigation"></div>
+                <div class="col-sm-9">
+                    <h3> <span th:text="${screenTitle}">Title</span> </h3>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Task Title</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                            <th>Assigned To</th>
+                            <th> View </th>
+                            <th th:if="${hasAdminRole == true}"> Edit </th>
+                            <th th:if="${hasAdminRole == true}"> Delete </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="task: ${tasks}" th:if="${!tasks.empty}">
+                                <th><span th:text="${task.title}"></span></th>
+                                <th><span th:text="${task.detail}"></span></th>
+                                <th><span th:text="${task.status}"></span></th>
+                                <th><span th:text="${task.assignedPerson}"></span></th>
+                                <th>
+                                    <form th:action="@{/viewTask}" method="get">
+                                        <input type="hidden" name="taskId" th:value="${task.id}">
+                                        <button type="submit" class="btn btn-primary">View</button>
+                                    </form>
+                                </th>
+                                <th th:if="${hasAdminRole == true}">
+                                    <form th:action="@{/showEditTask}" method="get">
+                                        <input type="hidden" name="taskId" th:value="${task.id}">
+                                        <button type="submit" class="btn btn-primary">Edit</button>
+                                    </form>
+                                </th>
+                                <th th:if="${hasAdminRole == true}">
+                                    <form th:action="@{/deleteTask}" method="post" id="deleteTaskFrm">
+                                        <input type="hidden" name="taskId" th:value="${task.id}">
+                                        <button type="button" class="btn btn-primary" id="deleteTask">Delete</button>
+                                    </form>
+                                </th>
+                            </tr>
+                            <tr th:if="${tasks.empty}">
+                               <td colspan="4">No Record found </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    $("#deleteTask").click(function(){
+        var isDelete = confirm("Do you really want to delete the Task ?");
+        if(isDelete == true){
+            $("#deleteTaskFrm").submit()
+        }
+    });
+</script>
