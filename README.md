@@ -59,7 +59,7 @@ We also provide a PDF file that has color images of the screenshots/diagrams use
 
 Click on the following link to see the Code in Action:
 
-[Click here to view the videos](link here)
+[Click here to view the videos](http://bit.ly/2ED57Ss)
 
 ### Related products
 * Mastering Spring Boot 2.0 [[Packt]](https://www.packtpub.com/application-development/mastering-spring-boot-20?utm_source=github&utm_medium=repository&utm_campaign=9781787127562 ) [[Amazon]](https://www.amazon.com/dp/1787127567)
