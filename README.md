@@ -55,6 +55,12 @@ With the following software and hardware list you can run all code files present
 
 We also provide a PDF file that has color images of the screenshots/diagrams used in this book. [Click here to download it](packtpub.com/sites/default/files/downloads/9781788390415_ColorImages.pdf.).
 
+## Code in Action
+
+Click on the following link to see the Code in Action:
+
+[Click here to view the videos](link here)
+
 ### Related products
 * Mastering Spring Boot 2.0 [[Packt]](https://www.packtpub.com/application-development/mastering-spring-boot-20?utm_source=github&utm_medium=repository&utm_campaign=9781787127562 ) [[Amazon]](https://www.amazon.com/dp/1787127567)
 
