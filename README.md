@@ -64,11 +64,8 @@ Click on the following link to see the Code in Action:
 ### Related products
 * Mastering Spring Boot 2.0 [[Packt]](https://www.packtpub.com/application-development/mastering-spring-boot-20?utm_source=github&utm_medium=repository&utm_campaign=9781787127562 ) [[Amazon]](https://www.amazon.com/dp/1787127567)
 
-* Hands-On Reactive Programming in Spring 5[[Packt]](https://www.packtpub.com/application-development/hands-reactive-programming-spring-5?utm_source=github&utm_medium=repository&utm_campaign=) [[Amazon]](https://www.amazon.com/dp/1787284956)
+* Hands-On Reactive Programming in Spring 5 [[Packt]](https://www.packtpub.com/application-development/hands-reactive-programming-spring-5?utm_source=github&utm_medium=repository&utm_campaign=) [[Amazon]](https://www.amazon.com/dp/1787284956)
 
-*  [[Packt]]() [[Amazon]](https://www.amazon.com/dp/)
-
-*  [[Packt]]() [[Amazon]](https://www.amazon.com/dp/)
 
 ## Get to Know the Author
 **Nilang Patel**
@@ -78,13 +75,6 @@ has over 15 years of core IT experience in leading project, software design and 
 ## Other books by the authors
 [Java 9 Dependency Injection](https://www.packtpub.com/application-development/java-9-dependency-injection?utm_source=github&utm_medium=repository&utm_campaign=9781788296250 )
 
-[]()
-
-[]()
-
-[]()
-
-[]()
 
 ### Suggestions and Feedback
 [Click here](https://docs.google.com/forms/d/e/1FAIpQLSdy7dATC6QmEL81FIUuymZ0Wy9vH1jHkvpY57OiMeKGqib_Ow/viewform) if you have any feedback or suggestions.
