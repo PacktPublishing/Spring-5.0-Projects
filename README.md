@@ -51,7 +51,7 @@ With the following software and hardware list you can run all code files present
 | 07                 | IntelliJ IDE - COMMUNITY 2018.3                                         | Windows 64-bit |
 
 
-We also provide a PDF file that has color images of the screenshots/diagrams used in this book. [Click here to download it](packtpub.com/sites/default/files/downloads/9781788390415_ColorImages.pdf.).
+We also provide a PDF file that has color images of the screenshots/diagrams used in this book. [Click here to download it](https://www.packtpub.com/sites/default/files/downloads/9781788390415_ColorImages.pdf).
 
 ## Code in Action
 
