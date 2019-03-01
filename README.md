@@ -40,18 +40,16 @@ This book is for competent Spring developers who wish to understand how to devel
 
 With the following software and hardware list you can run all code files present in the book (Chapter 1-7).
 ### Software and Hardware List
-| Chapter | Software required | OS required |
-| -------- | ------------------------------------ | ----------------------------------- |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
+| Chapter            | Software required                                                       | OS required    |
+| -------------------| ------------------------------------------------------------------------| ---------------|
+|    01              | Eclipse IDE - Photon 2018-12 R                                          | Windows 64-bit |
+| 02 , 05, 06, 07    | MySQL Server, MySQL Workbench -8.0                                      | Windows 64-bit |
+| 02, 03, 04, 05, 06 | Spring Tool Suite (STS)                                                 | Windows 64-bit |
+| 03                 | Elasticsearch -6.4.0 and latest version, Kibana - 6.6.1                 | Windows 64-bit |
+| 04                 | Apache Directory Studio - 2.0                                           | Windows 64-bit |
+| 05                 | Node JS- 10.13.0, NPM (Node Package Manager) - 6.4.1, JHipster - 5.8.2  | Windows 64-bit |
+| 07                 | IntelliJ IDE - COMMUNITY 2018.3                                         | Windows 64-bit |
+
 
 We also provide a PDF file that has color images of the screenshots/diagrams used in this book. [Click here to download it](packtpub.com/sites/default/files/downloads/9781788390415_ColorImages.pdf.).
 
