@@ -1,6 +1,6 @@
 # Spring 5.0 Projects
 
-<a href="https://www.packtpub.com/application-development/spring-50-blueprints?utm_source=github&utm_medium=repository&utm_campaign=9781788390415 "><img src="https://dz13w8afd47il.cloudfront.net/sites/default/files/imagecache/ppv4_main_book_cover/B08201_MockupCover.png" alt="Spring 5.0 Blueprints" height="256px" align="right"></a>
+<a href="https://www.packtpub.com/application-development/spring-50-blueprints?utm_source=github&utm_medium=repository&utm_campaign=9781788390415 "><img src="https://dz13w8afd47il.cloudfront.net/sites/default/files/imagecache/ppv4_main_book_cover/B08201_MockupCover.png" alt="Spring 5.0 Projects" height="256px" align="right"></a>
 
 This is the code repository for [Spring 5.0 Blueprints](https://www.packtpub.com/application-development/spring-50-blueprints?utm_source=github&utm_medium=repository&utm_campaign=9781788390415 ), published by Packt.
 
