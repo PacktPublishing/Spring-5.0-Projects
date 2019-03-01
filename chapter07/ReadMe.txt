@@ -1,2 +1,2 @@
-KotlinBasics folder contains all codes for basic kotlin features covered in Chapter 7
-taskmanagementsystem is full fledge Spring Boot based Kotlin application called - Task Management System.
+KotlinBasics - contains code for core Kotlin functionalities.
+taskmanagementsystem - contains code for Task management system build in Kotlin and Spring Boot

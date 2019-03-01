@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) 
       throws Exception {
         auth.inMemoryAuthentication()
-          .withUser("john").password(new BCryptPasswordEncoder().encode("123")).authorities("USER");
+          .withUser("john").password(new BCryptPasswordEncoder().encode("123")).authorities("USER","ADMIN");
     }
 
     @Override

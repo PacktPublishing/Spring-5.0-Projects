@@ -18,7 +18,6 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Greenwich.RC2</spring-cloud.version>
-		<!-- <spring-cloud.version>Finchley.SR2</spring-cloud.version> -->
 	</properties>
 
 	<dependencies>

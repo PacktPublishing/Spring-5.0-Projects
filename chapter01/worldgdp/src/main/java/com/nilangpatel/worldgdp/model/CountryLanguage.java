@@ -27,7 +27,7 @@ public class CountryLanguage {
 	@NotNull 
 	private Double percentage;
 
-	/*public Country getCountry() {
+	public Country getCountry() {
 		return country;
 	}
 
@@ -65,7 +65,7 @@ public class CountryLanguage {
 
 	public void setPercentage(Double percentage) {
 		this.percentage = percentage;
-	}*/
+	}
 	
 	
 }

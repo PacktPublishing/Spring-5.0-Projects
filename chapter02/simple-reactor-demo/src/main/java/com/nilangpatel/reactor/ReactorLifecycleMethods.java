@@ -26,7 +26,7 @@ public class ReactorLifecycleMethods {
 					} catch (InterruptedException e) {
 					e.printStackTrace();
 					}
-					subscription.request(1);
+					subscription.request(1); // This will send request for next element to Observable
 				}
 			})
 		.doOnError(

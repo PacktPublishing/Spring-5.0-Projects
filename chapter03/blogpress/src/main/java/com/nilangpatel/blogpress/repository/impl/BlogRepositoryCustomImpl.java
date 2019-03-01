@@ -3,14 +3,12 @@ package com.nilangpatel.blogpress.repository.impl;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
+import org.apache.lucene.search.TermQuery;
 import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.action.update.UpdateRequest;
-import org.elasticsearch.action.update.UpdateResponse;
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.TermQueryBuilder;
-import org.elasticsearch.script.Script;
 import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.bucket.nested.NestedAggregationBuilder;
@@ -25,10 +23,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nilangpatel.blogpress.model.Blog;
 import com.nilangpatel.blogpress.model.Comment;
 import com.nilangpatel.blogpress.repository.BlogRepositoryCustom;
 
@@ -116,7 +112,54 @@ public class BlogRepositoryCustomImpl implements BlogRepositoryCustom {
 		return currentChildSeq;
 	}
 	
-	private static int getMaxChildSequenceFromJson(String aggJson) {
+	/**
+	 * This method will retuls list of blog for given search text.
+	 * Search will happens on title and body of the blog.
+	 * 
+	 * @param searchTxt
+	 * @return List of Blogs
+	 */
+	@Override
+	public List<Blog> search(String searchTxt){
+		
+		QueryBuilder booleanQry = QueryBuilders.boolQuery()
+                		 .should(QueryBuilders.termQuery("title", searchTxt))
+                		 .should(QueryBuilders.termQuery("body", searchTxt));
+		
+		SearchResponse response = elasticsearchTemplate.getClient().prepareSearch("blog")
+				  .setTypes("blog")
+				  .setQuery(booleanQry)
+				  .execute().actionGet();
+		
+		List<Blog> blogSearchResultLst = getBlogListFromSearchJSON(response.toString());
+		
+		return blogSearchResultLst;
+	}
+	
+	private List<Blog> getBlogListFromSearchJSON(String jsonResponse) {
+		
+		List<Blog> blogResults = new ArrayList<Blog>();
+		ObjectMapper objMapper = new ObjectMapper();
+		if(jsonResponse !=null) {
+			JSONObject searchJson = new JSONObject(jsonResponse);
+			if(searchJson.get("hits") !=null) {
+				JSONObject resultJson = searchJson.getJSONObject("hits");
+				try {
+					if(resultJson !=null && resultJson.get("hits") !=null) {
+						JSONArray blogArr = resultJson.getJSONArray("hits");
+						for(int jsonIndex=0;jsonIndex < blogArr.length(); jsonIndex++) {
+							blogResults.add(objMapper.readValue(blogArr.getJSONObject(jsonIndex).getJSONObject("_source").toString(), Blog.class));
+						}
+					}
+				} catch (JSONException | IOException e) {
+					logger.error("error occuired while fetching all comments "+e.getMessage(),e);
+				}	
+			}
+		}
+		return blogResults;
+	}
+	
+	private int getMaxChildSequenceFromJson(String aggJson) {
 		int childSequence=0;
 		double maxChildSeq=0.0;
 		if(aggJson !=null) {

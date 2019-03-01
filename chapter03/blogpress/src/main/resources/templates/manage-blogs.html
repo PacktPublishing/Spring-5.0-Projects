@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="header :: jscssinclude"></head>
+	<body>
+		<div th:replace="header :: header_navigation"></div>
+		<div class="container blogpress-section">
+			<div class="row">
+				 <div th:replace="control-page :: admin_navigation">
+					
+				</div>
+				<div class="col-sm-8">
+					<h2>Manage Blogs</h2>
+					 <div class="container">
+					   <div class="blogpress-section" id="blogList">
+						 <div class="card bg-white mb-3" th:each="blog: ${blogs}">
+						   <div class="card-body">
+							<h5 class="card-title" th:text="${blog.title}">Title</h5>
+							<p class="card-text" th:text="${blog.body}">body</p>
+							 <form th:action="@{/showUpdateBlogPage}" method="post" class="float-left mr-3">
+								<input type="hidden" name="blogId" th:value="${blog.id}">
+								<button type="submit" class="btn btn-primary">Edit Blog</button>
+							 </form>
+							 <form th:action="@{/deleteBlog}" method="post">
+								<input type="hidden" name="blogId" th:value="${blog.id}">
+								<button type="submit" class="btn btn-primary" onclick = "getConfirmation(event);">Delete Blog</button>
+							 </form>
+						   </div>
+						   <div class="card-footer text-muted">
+							By : <b> <span th:text="${blog.createdBy}"></span></b> &nbsp; comments: <b><span th:text="${blog.commentSize}"></span></b> &nbsp; Published on <b><span th:text="${blog.publishDateForDisplay}"></span></b>
+						   </div>
+						 </div>
+					  </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+
+function getConfirmation(event) {
+    var retVal = confirm("Do you want to delete the record ?");
+    if( retVal == true ) {
+       return true;
+    } else {
+       event.preventDefault();	
+       return false;
+    }
+ }
+</script>

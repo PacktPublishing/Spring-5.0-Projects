@@ -31,7 +31,6 @@ import com.bookstore.catalog.repository.CategoryRepository;
 import com.bookstore.catalog.repository.PublisherRepository;
 
 @RestController
-//@RefreshScope
 @RequestMapping("/api/catalog")
 public class CatalogRESTController {
 

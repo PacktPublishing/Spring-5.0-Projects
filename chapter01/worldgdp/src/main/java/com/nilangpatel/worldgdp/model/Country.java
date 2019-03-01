@@ -52,7 +52,7 @@ public class Country {
 	@NotNull 
 	private String code2;
 
-	/*public String getCode() {
+	public String getCode() {
 		return code;
 	}
 
@@ -162,7 +162,7 @@ public class Country {
 
 	public void setCode2(String code2) {
 		this.code2 = code2;
-	}*/
+	}
 
 	
 }

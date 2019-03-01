@@ -32,7 +32,7 @@ public class City {
 	@NotNull 
 	private Long population;
 
-	/*public Long getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -78,7 +78,7 @@ public class City {
 
 	public void setPopulation(Long population) {
 		this.population = population;
-	}*/
+	}
 	
 	
 }

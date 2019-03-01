@@ -49,12 +49,13 @@
 	                </li>
 	            </ul>
 	            <form class="form-inline my-2 my-lg-0 mr-sm-2" th:action="@{/search}" method="POST">
-			      <input class="form-control mr-sm-2" name="searchText" type="text" placeholder="Search">
+			      <input class="form-control mr-sm-2" name="searchText" type="text" placeholder="Search" th:value="${searchText}" >
 			      <button type="submit" class="btn btn-primary my-2 my-sm-0">Search</button>
 			    </form>
+			    <span th:if="${validUserLogin} == true" class="mr-sm-2 text-white border rounded py-1 px-1">
+			    	Hello, <b th:text="${currentUserName}">User Name</b>
+                </span>
 			    <div id="logged-in-info" th:if="${validUserLogin} == true"> 
-                   	<span>Hello, 
-                   		<b th:text="${currentUserName}">User Name</b></span>
 					<form method="post" th:action="@{/logout}">
 						<button type="submit" class="btn" value="Logout">Logout</button>
 					</form>

@@ -73,4 +73,15 @@ public class BlogService {
 		}
 		
 	}
+	
+	public List<Blog> search(String searchTxt){
+		return this.blogRepository.search(searchTxt);
+	}
+	
+	public void deleteBlog(String blogId) {
+		Optional<Blog> blogObj = this.blogRepository.findById(blogId);
+		if(blogObj.isPresent()) {
+			this.blogRepository.delete(blogObj.get());
+		}
+	}
 }

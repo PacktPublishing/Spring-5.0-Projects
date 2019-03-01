@@ -142,6 +142,14 @@ public class Blog {
 		return returnDateStr;
 	}
 	
+	public int getCommentSize() {
+		if(this.comments !=null) {
+			return this.comments.size();
+		}else {
+			return 0;
+		}
+	}
+	
 	@Override
     public String toString() {
         return "blog {" +

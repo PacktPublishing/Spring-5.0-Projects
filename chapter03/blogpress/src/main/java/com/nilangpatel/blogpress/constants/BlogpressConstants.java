@@ -17,6 +17,7 @@ public interface BlogpressConstants {
 	String TITLE_LANDING_CONTROL_PAGE="Control Page";
 	String TITLE_EDIT_BLOG_PAGE="Edit Blog";
 	String TITLE_MANAGE_COMMENT_PAGE="Manage Comment";
+	String TITLE_MANAGE_BLOG_PAGE="Manage Blog";
 	String TITLE_NEW_BLOG_PAGE="New Blog";
 	String TITLE_SEARCH_PAGE="Search Blog";
 	String TITLE_VIEW_BLOG_PAGE="View Blog";

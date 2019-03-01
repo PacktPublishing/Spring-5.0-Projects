@@ -36,15 +36,6 @@ public class CustomAuthorizationConfig extends AuthorizationServerConfigurerAdap
 	@Autowired
 	PasswordEncoder encoder;
  
-   /*@Override
-    public void configure(
-      AuthorizationServerSecurityConfigurer oauthServer) 
-      throws Exception {
-        oauthServer
-          .tokenKeyAccess("hasAuthority('ROLE_TRUSTED_CLIENT')")
-          .checkTokenAccess("hasAuthority('ROLE_TRUSTED_CLIENT')");
-    }*/
-    
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) 
       throws Exception {
@@ -53,7 +44,7 @@ public class CustomAuthorizationConfig extends AuthorizationServerConfigurerAdap
           .authorizedGrantTypes("implicit")
           .scopes("read", "write", "trust")
           .secret(encoder.encode("123"))
-          .redirectUris("http://localhost:8080/springauthresource/privatePage")
+          .redirectUris("http://localhost:8082/privatePage")
           .resourceIds("oauth2-server");
     }
     
@@ -90,40 +81,5 @@ public class CustomAuthorizationConfig extends AuthorizationServerConfigurerAdap
         defaultTokenServices.setTokenEnhancer(accessTokenConverter());
         return defaultTokenServices;
     }
-    
-  /* @Bean
-    public ApprovalStore approvalStore() throws Exception {
-        TokenApprovalStore store = new TokenApprovalStore();
-        store.setTokenStore(tokenStore());
-        return store;
-    }*/
-    
-    /*@Bean
-    public UserApprovalHandler userApprovalHandler() throws Exception {
-        TokenStoreUserApprovalHandler handler = new TokenStoreUserApprovalHandler();
-        handler.setRequestFactory(new DefaultOAuth2RequestFactory(clientDetailsService));
-        handler.setClientDetailsService(clientDetailsService);
-        handler.setTokenStore(tokenStore);
 
-        return handler;
-    }*/
- 
-    
-   /* @Bean
-    @Autowired
-    public TokenStoreUserApprovalHandler userApprovalHandler(TokenStore tokenStore){
-        TokenStoreUserApprovalHandler handler = new TokenStoreUserApprovalHandler();
-        handler.setTokenStore(tokenStore);
-        handler.setRequestFactory(new DefaultOAuth2RequestFactory(clientDetailsService));
-        handler.setClientDetailsService(clientDetailsService);
-        return handler;
-    }
-     
-    @Bean
-    @Autowired
-    public ApprovalStore approvalStore(TokenStore tokenStore) throws Exception {
-        TokenApprovalStore store = new TokenApprovalStore();
-        store.setTokenStore(tokenStore);
-        return store;
-    }*/
 }

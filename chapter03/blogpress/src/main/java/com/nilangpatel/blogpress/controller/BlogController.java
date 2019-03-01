@@ -3,6 +3,7 @@ package com.nilangpatel.blogpress.controller;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -89,25 +90,80 @@ public class BlogController {
 		return "home";
 	}
 	
-	@PostMapping("/viewBlog")
+	@GetMapping("/manageBlogs")
+	public String showManageBlogPage(Model model) {
+		logger.info("This is manage blog page method ");
+		setProcessingData(model, BlogpressConstants.TITLE_MANAGE_BLOG_PAGE);
+		
+		List<Blog> blogSearchResultLst = blogService.getAllBlogs();
+		model.addAttribute("blogs",blogSearchResultLst);
+		
+		return "manage-blogs";
+	}
+	
+	@PostMapping("/showUpdateBlogPage")
+	public String showUpdateBlogPage(@RequestParam(value = "blogId",required = true) String blogId, 
+								Model model) {
+		Blog blog = blogService.getBlog(blogId);
+		model.addAttribute("blog",blog);
+		return "edit-blog";
+	}
+	
+	@PostMapping("/updateBlog")
+	public String updateBlog(@RequestParam(value = "blogId",required = true) String blogId,
+							 @RequestParam(value = "title",required = true) String title,
+							 @RequestParam(value = "body",required = true) String body,
+				Model model) {
+		Blog blog = blogService.getBlog(blogId);
+		if(blog !=null) {
+			blog.setTitle(title);
+			blog.setBody(body);
+			blogService.addUpdateBlog(blog);
+		}
+		model.addAttribute("blog",blog);
+		return "redirect:/manageBlogs";
+	}
+	
+	@PostMapping("/deleteBlog")
+	public String deleteBlog(@RequestParam(value = "blogId",required = true) String blogId,
+				Model model) {
+		blogService.deleteBlog(blogId);
+		return "redirect:/manageBlogs";
+	}
+	
+	@GetMapping("/viewBlog")
 	public String viewBlog(@RequestParam(value = "blogId",required = true) String blogId, Model model) {
 		logger.info("showing view blog page");
 		if(blogId !=null) {
 			Blog blog = blogService.getBlog(blogId);
-			List<Comment> approvedCommentLst = new ArrayList<Comment>();
+			List<Comment> approvedCommentLst = null;
 			if(blog.getComments() !=null && !blog.getComments().isEmpty()) {
-				for(Comment comment : blog.getComments()) {
-					if(CommentStatus.APPROVED.getStatus().equalsIgnoreCase(comment.getStatus())) {
-						approvedCommentLst.add(comment);
-					}
+				approvedCommentLst = blog.getComments().stream().
+						filter(comment->comment.getStatus().equalsIgnoreCase("A"))
+						.collect(Collectors.toList());
+				if(approvedCommentLst !=null) {
+					blog.setComments(approvedCommentLst);
+				}else {
+					blog.setComments(new ArrayList<Comment>());
 				}
-				blog.setComments(approvedCommentLst);
+			}
+			if(blog.getComments() == null || blog.getComments().isEmpty()) {
+				blog.setComments(new ArrayList<Comment>());
 			}
 			model.addAttribute("blog", blog);
 		}
 		setProcessingData(model, BlogpressConstants.TITLE_VIEW_BLOG_PAGE);
 		return "view-blog";
-	} 
+	}
+	
+	@PostMapping("/search")
+	public String searchBlog(@RequestParam(value="searchText") String searchText,Model model){
+		
+		List<Blog> blogSearchResultLst = blogService.search(searchText);
+		model.addAttribute("blogSearchResultLst",blogSearchResultLst);
+		model.addAttribute("searchText", searchText);
+		return "search"; 
+	}
 	
 	@PostMapping("/updateCommentStatus")
 	public String updateCommentStatus(@RequestParam(value = "blogId",required = true) String blogId,
@@ -186,7 +242,7 @@ public class BlogController {
 		}
 		
 		setProcessingData(model, BlogpressConstants.TITLE_VIEW_BLOG_PAGE);
-		return "view-blog";
+		return "redirect:viewBlog?blogId="+blogId;
 	}
 	
 	/**

@@ -2,7 +2,7 @@ package com.nilangpatel.kotlin.function.extension
 
 fun main(args: Array<String>) {
     //Un comment this to see Extension Function on String
-    //print("this is just for sample".camelCase())
+    print("this is just for sample".camelCase())
     print(3.square())
 }
 

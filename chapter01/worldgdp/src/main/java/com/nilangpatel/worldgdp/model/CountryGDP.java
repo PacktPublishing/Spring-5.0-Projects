@@ -12,7 +12,7 @@ public class CountryGDP {
 	private Short year;
 	private Double value;
 	
-	/*public Short getYear() {
+	public Short getYear() {
 		return year;
 	}
 	public void setYear(Short year) {
@@ -23,7 +23,7 @@ public class CountryGDP {
 	}
 	public void setValue(Double value) {
 		this.value = value;
-	}*/
+	}
 	
 	
 }

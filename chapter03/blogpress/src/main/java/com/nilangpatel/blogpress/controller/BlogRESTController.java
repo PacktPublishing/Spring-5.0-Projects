@@ -1,6 +1,9 @@
 package com.nilangpatel.blogpress.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +32,23 @@ public class BlogRESTController {
 	public ResponseEntity<List<Blog>> getAllBlogJSON() {
 		logger.info("getting all blog data in json format ");
 		List<Blog> allBlogs = blogService.getAllBlogs();
+		
+		List<Comment> commentLst = null;
+		for(Blog blog: allBlogs) {
+			if(blog.getComments() !=null && !blog.getComments().isEmpty()) {
+				commentLst = blog.getComments().stream().
+						filter(comment->comment.getStatus().equalsIgnoreCase("A"))
+						.collect(Collectors.toList());
+				if(commentLst !=null) {
+					blog.setComments(commentLst);
+				}else {
+					blog.setComments(new ArrayList<Comment>());
+				}
+			}
+			if(blog.getComments() == null || blog.getComments().isEmpty()) {
+				blog.setComments(new ArrayList<Comment>());
+			}
+		}
 		
 		return new ResponseEntity<List<Blog>>(allBlogs, HttpStatus.OK);
 	} 

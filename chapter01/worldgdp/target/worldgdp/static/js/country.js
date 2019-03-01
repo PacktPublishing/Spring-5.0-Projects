@@ -17,7 +17,7 @@ $(function(){
 		if ( result){
 			$.ajax({
 				method : "DELETE",
-				url: "/world/api/cities/"+cityId,
+				url: "/worldgdp/api/cities/"+cityId,
 				success:function(){
 					success("City deleted successfully");
 					getCities(1);
@@ -36,7 +36,7 @@ $(function(){
 		if ( result ){
 			$.ajax({
 				method : "DELETE",
-				url: "/world/api/languages/"+code+"/language/"+lang,
+				url: "/worldgdp/api/languages/"+code+"/language/"+lang,
 				success:function(){
 					success("Language deleted successfully");
 					getLanguages(1);
@@ -77,7 +77,7 @@ function loadNewLanguageModal(){
 
 function getCities(pageNo){
 	var params = {"pageNo" : pageNo};
-	$.getJSON("/world/api/cities/"+code, params, function(data){
+	$.getJSON("/worldgdp/api/cities/"+code, params, function(data){
 		var md = {};
 		md['list'] = data;
 		if ( data.length == pageSize){
@@ -98,7 +98,7 @@ function getCities(pageNo){
 
 function getLanguages(pageNo){
 	var params = {"pageNo" : pageNo};
-	$.getJSON("/world/api/languages/"+code, params, function(data){
+	$.getJSON("/worldgdp/api/languages/"+code, params, function(data){
 		var md = {};
 		md['list'] = data;
 		if ( data.length == pageSize){
@@ -127,7 +127,7 @@ function getLanguages(pageNo){
 }
 
 function getGDP(){
-	$.getJSON("/world/api/countries/"+code+"/gdp", function(data){
+	$.getJSON("/worldgdp/api/countries/"+code+"/gdp", function(data){
 	
 		var dataTable = new google.visualization.DataTable();
 		dataTable.addColumn('number', 'Years');

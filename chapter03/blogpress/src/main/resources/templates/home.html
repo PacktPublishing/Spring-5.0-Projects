@@ -10,7 +10,7 @@
 				   <div class="card-body">
 					<h5 class="card-title">{{title}}</h5>
 					<p class="card-text">{{body}}</p>
-					 <form th:action="@{/viewBlog}" method="post">
+					 <form th:action="@{/viewBlog}" method="get">
 						<input type="hidden" name="blogId" value="{{id}}">
 						<button type="submit" class="btn btn-primary">Read More ..</button>
 					 </form>

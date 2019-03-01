@@ -27,9 +27,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers("/", "/api/listBlogs","/viewBlog","/addComment").permitAll()
-            .antMatchers("/controlPage","/addNewBlog").hasAnyAuthority(BlogpressConstants.ROLE_USER,BlogpressConstants.ROLE_ADMIN)
-            .antMatchers("/showComments").hasAnyAuthority(BlogpressConstants.ROLE_ADMIN)
+			.antMatchers("/", "/api/listBlogs","/viewBlog","/addComment","/search").permitAll()
+            .antMatchers("/controlPage/","/addNewBlog/").hasAnyAuthority(BlogpressConstants.ROLE_USER,BlogpressConstants.ROLE_ADMIN)
+            .antMatchers("/showComments/").hasAnyAuthority(BlogpressConstants.ROLE_ADMIN)
             .and()
         .formLogin().loginPage("/login").permitAll()
         	.defaultSuccessUrl("/controlPage",true)
