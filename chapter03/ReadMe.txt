@@ -1,1 +1,0 @@
-blogpress folder contains the Spring project for BlogPress application
