@@ -1,1 +1,0 @@
-The folder worldgdp contain the project for showing GDP infromation
