@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{base}">
+
+<head>
+	<title>[[${c.code}]] - [[${c.name}]] </title>
+</head>
+
+<div layout:fragment="page_content" id="page_content">
+	<nav aria-label="breadcrumb" role="navigation">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a th:href="@{/countries}">Countries</a></li>
+			<li class="breadcrumb-item active" aria-current="page">[[${c.name}]]</li>
+		</ol>
+	</nav>
+	<h1>
+		[[|${c.name}(${c.code} / ${c.code2})|]]
+		
+		<span class="pull-right">
+			<a class="btn btn-sm btn-success" th:href="@{|/countries/${c.code}/form|}">
+				<i class="fa fa-pencil"></i> Edit
+			</a>
+		</span>
+	</h1>
+	<div class="row">
+		<div th:class="|col-md-3 flag-icon flag-icon-${#strings.toLowerCase(c.code2)}|">
+		</div>
+		
+		<div class="col-md-9">
+			<div class="row">
+			
+				<div class="col">
+					<div class="row">
+						<div class="col font-weight-bold">Capital</div>
+						<div class="col">[[${c.capital.name}]]</div>
+					</div>
+					<div class="row">
+						<div class="col font-weight-bold">Continent</div>
+						<div class="col">[[${c.continent}]]</div>
+					</div>
+					<div class="row">
+						<div class="col font-weight-bold">Region</div>
+						<div class="col">[[${c.region}]]</div>
+					</div>
+					<div class="row">
+						<div class="col font-weight-bold">Head of State</div>
+						<div class="col">[[${c.headOfState}]]</div>
+					</div>
+					<div class="row">
+						<div class="col font-weight-bold">Government</div>
+						<div class="col">[[${c.governmentForm}]]</div>
+					</div>
+				</div>
+				<div class="col">
+					<div class="row">
+						<div class="col font-weight-bold">Local Name</div>
+						<div class="col">[[${c.localName}]]</div>
+					</div>
+					<div class="row">
+						<div class="col font-weight-bold">Independence</div>
+						<div class="col">[[${c.indepYear}]]</div>
+					</div>
+					<div class="row">
+						<div class="col font-weight-bold">Surface Area</div>
+						<div class="col">[[${c.surfaceArea}]]</div>
+					</div>
+					<div class="row">
+						<div class="col font-weight-bold">Population</div>
+						<div class="col">[[${c.population}]]</div>
+					</div>
+					<div class="row">
+						<div class="col font-weight-bold">Life Expectancy</div>
+						<div class="col">[[${c.lifeExpectancy}]]</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr/>
+	<div class="row">
+	
+		<div class="col-md-3">
+			<h2>Cities
+				<span class="pull-right">
+					<button id="new-city" class="btn btn-sm btn-success"
+					
+					 title="Add New City"><i class="fa fa-plus"></i> New </button>
+				</span></h2>
+			<ul class="list-group" id="cities">
+				<li class="list-group-item alert alert-info">
+					<i class="fa fa-spinner fa-spin"></i> Loading cities...
+				</li>
+			</ul>
+		</div>
+		<div class="col-md-3">
+			<h2>Languages
+				<span class="pull-right">
+					<button id="new-language" class="btn btn-sm btn-success"
+					 title="Add New Language"><i class="fa fa-plus"></i> New</button>
+				</span>
+			</h2>
+			<ul class="list-group" id="languages">
+				<li class="list-group-item alert alert-info">
+					<i class="fa fa-spinner fa-spin"></i> Loading languages...
+				</li>
+			</ul>
+		</div>
+		<div class="col-md-6">
+			<h2>GDP</h2>
+			<div id="gdp-chart" style="height: 480px;">
+				<div class="alert alert-info">
+					<i class="fa fa-spinner fa-spin"></i> Loading GDP Data...
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>
+<th:block layout:fragment="scripts">
+	<script th:inline="javascript">
+		var code = [[${c.code}]];
+	</script>
+	<script th:src="@{/static/js/country.js}"></script>
+	
+	<script type="text/html" id="cities-list-template">
+		{{#list}}
+		<li class="list-group-item">
+			{{name}}<br/>
+			<small class="grey">{{district}}</small>
+			<span class="pull-right">
+				<span class="badge badge-primary">{{population}}</span>
+				<a href="javascript:void(0);" class="delete-city text-danger" title="Delete City"
+					data-id="{{id}}">
+					<i class="fa fa-times"></i></a>
+			</span>
+		</li>
+		{{/list}}
+		{{#more}}
+		<button class="btn btn-sm btn-primary btn-block" onclick="getCities({{pageNo}})">Load More</button>
+		{{/more}}
+	</script>
+	<script type="text/html" id="languages-list-template">
+		{{#list}}
+		<li class="list-group-item">
+			{{language}}
+			{{#isOfficial_Bool}}
+			<i class="fa fa-certificate" style="color: green;" title="Official Language"></i>
+			{{/isOfficial_Bool}}
+			<span class="pull-right">
+				<span class="badge badge-primary">{{percentage_fmt}}%</span>
+				<a href="javascript:void(0);" class="delete-language text-danger" title="Delete Language"
+					data-code="{{countryCode}}" data-lang="{{language}}">
+					<i class="fa fa-times"></i>
+				</a>
+			</span>
+		</li>
+		{{/list}}
+		{{#more}}
+		<button class="btn btn-sm btn-primary btn-block" onclick="getLanguages({{pageNo}})">Load More</button>
+		{{/more}}
+	</script>
+
+	<script type="text/html" id="city-form-template">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="myModalLabel">City</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="city-form" method="POST"  
+						class="form-horizontal"
+						th:action="@{|/api/cities/${c.code}|}" >
+						<input type="hidden" th:value="${c.code}" id="countryCode" name="countryCode" />
+						<div class="row">
+							<div class="col-md-12">
+								<label class="required" for="name">Name</label>
+								<input type="text" name="name" id="name" value="{{name}}" 
+									class="form-control required" />
+							</div>
+						</div>
+						<br/>
+						<div class="row">
+							<div class="col-md-12">
+								<label class="required" for="district">District</label>
+								<input type="text" name="district" id="district" value="{{district}}" 
+									class="form-control required" />
+							</div>
+						</div>
+						<br/>
+						<div class="row">
+							<div class="col-md-12">
+								<label class="required" for="population">Population</label>
+								<input type="text" name="population" id="population" value="{{population}}" 
+									class="form-control required number" />
+							</div>
+						</div>
+						<div class="modal-form-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary pull-right" id="save-btn">Save</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</script>
+	<script type="text/html" id="language-form-template">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="myModalLabel">Language</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="language-form" method="POST"  
+						class="form-horizontal"
+						th:action="@{|/api/languages/${c.code}|}" >
+						<input type="hidden" th:value="${c.code}" id="countryCode" name="countryCode" />
+						<div class="row">
+							<div class="col-md-12">
+								<label class="required" for="language">Language</label>
+								<input type="text" name="language" id="language" value="{{language}}" 
+									class="form-control required" />
+							</div>
+						</div>
+						<br/>
+						<div class="row">
+							<div class="col-md-12">
+								<label class="form-check-label">
+									<input type="hidden" name="isOfficial" value="0" />
+                      				<input type="checkbox" class="form-check-input" id="isOfficial"
+										name="isOfficial" value="0"/>
+                      					Is Official
+                    			</label>
+							</div>
+						</div>
+						<br/>
+						<div class="row">
+							<div class="col-md-12">
+								<label class="required" for="percentage">Percentage</label>
+								<input type="text" name="percentage" id="percentage" value="{{percentage}}" 
+									class="form-control required number" />
+							</div>
+						</div>
+						<div class="modal-form-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary pull-right" id="save-btn">Save</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		
+	</script>
+</th:block>
+</html>

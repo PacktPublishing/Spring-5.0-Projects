@@ -1,0 +1,12 @@
+.grey {
+	color: lightgrey;
+}
+
+#footer {
+    margin: 2em 0;
+}
+
+.modal-form-footer {
+	padding: 10px;
+	border-top: 1px solid #e5e5e5;
+}
