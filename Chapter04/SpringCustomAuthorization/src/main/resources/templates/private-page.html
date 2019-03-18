@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="header :: jscssinclude"></head>
+
+<body>
+    <div th:replace="header :: header_navigation"></div>
+	<div class="container blogpress-section">
+		This is private page ..!!! If you able to see this, means you are successfully authenticated.
+    </div>
+    <script type="text/javascript">
+	    $("#btnLogin").click(function(event) {
+	    	fireFormValidation($("#loginForm"));
+		});
+    </script>
+</body>
+
+</html>

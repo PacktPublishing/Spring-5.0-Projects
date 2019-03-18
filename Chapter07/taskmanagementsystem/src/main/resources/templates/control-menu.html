@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="header :: jscssinclude"></head>
+    <body>
+        <div th:replace="header :: header_navigation">
+        </div>
+        <div class="col-sm-3" th:fragment="control_navigation">
+            <h3>Control Panel Menu</h3>
+            <ul class="nav nav-pills flex-column bg-light">
+                <li class="nav-item">
+                    <span class="nav-link active">Task Management</span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/allTaskList/?myTask=true}">My Tasks</a>
+                </li>
+                <li class="nav-item" th:if="${hasAdminRole == true}">
+                    <a class="nav-link" th:href="@{/allTaskList/}">All Tasks</a>
+                </li>
+                <li class="nav-item" th:if="${hasAdminRole == true}">
+                    <a class="nav-link" th:href="@{/showAddTask/}">Add New Tasks</a>
+                </li>
+            </ul>
+        </div>
+    </body>
+
+</html>

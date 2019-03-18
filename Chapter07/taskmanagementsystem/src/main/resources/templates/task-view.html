@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="header :: jscssinclude"></head>
+    <body>
+        <div th:replace="header :: header_navigation"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3" th:replace="control-menu :: control_navigation"></div>
+                <div class="col-sm-9">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Task Title</th>
+                                <th>Description</th>
+                                <th>Status</th>
+                                <th>Assigned To</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th><span th:text="${task.title}"></span></th>
+                                <th><span th:text="${task.detail}"></span></th>
+                                <th><span th:text="${task.status}"></span></th>
+                                <th><span th:text="${task.assignedPerson}"></span></th>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h3> Add Comment </h3>
+                    <div class="row">
+                        <form th:action="@{/addTaskComment}" method="post" class="needs-validation"  name="taskCommentFrm" id="taskCommentFrm">
+                            <input type="hidden" name="taskId" th:value="${task.id}">
+                            <textarea name="taskComment" rows="5" cols="80" required>
+                        </textarea>
+                            <input type="submit" class="btn btn-primary" name="addComment" id="btnAddTaskComment" value="Add Comment">
+                        </form>
+                    </div>
+                    <div class="row">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Comment</th>
+                                <th>Added By</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="taskComment: ${taskComments}" th:if="${!taskComments.empty}">
+                                <td th:text="${taskComment.comment}"> </td>
+                                <td th:text="${taskComment.userName}"> </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row" th:if="${taskComments.empty}">
+                        <span> No Comments are added yet</span>
+                    </div>
+                </div>
+            </div>
+         </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    $("#btnAddTaskComment").click(function(event) {
+        fireFormValidation($("#taskCommentFrm"));
+    });
+</script>

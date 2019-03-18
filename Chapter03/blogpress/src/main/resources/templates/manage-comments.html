@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header :: jscssinclude"></head>
+<body>
+	<div th:replace="header :: header_navigation"></div>
+	<div class="container blogpress-section">
+		<div class="row">
+			 <div th:replace="control-page :: admin_navigation">
+				
+			</div>
+			<div class="col-sm-8">
+				<h2>Manage Comment</h2>
+				<div class="container">
+					<div class="blogpress-section" id="commentList"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Define the template -->
+			<script id="comment_template" type="text/template">
+				{{#comments}}
+				 <div class="card bg-white mb-3">
+				   <div class="card-body">
+					<div class="card-title">
+						<div class="clearfix">
+							<p class="mb-0">
+								<span class="float-left"> By <span class="px-2">{{user}}</span></span>
+								<span class="float-right">On <span class="px-2">{{createdDateForDisplay}}</span>
+							</p>
+						</div>
+					</div>
+						<p class="card-text">{{commentText}}</p>
+					</div>
+ 					<div class="card-footer text-muted">
+						{{#showApproveReject}}
+						 <div>
+					 	 <form th:action="@{/updateCommentStatus}" method="post" id="updateCommentStatusFrm-{{id}}">
+							<input type="hidden" name="blogId" value="{{blogId}}">
+							<input type="hidden" name="commentId" value="{{id}}">
+							<input type="hidden" name="commentStatus" id="commentStatus-{{id}}" value="">
+							<button type="button" class="btn btn-primary" id="approveComment-{{id}}">Approve</button>
+							<button type="button" class="btn btn-primary" id="rejectComment-{{id}}">Reject</button>
+					 	 </form>
+						 </div>
+						{{/showApproveReject}}
+						{{#showReply}}
+						 <div>
+					       <form th:action="@{/replyComment}" method="post">
+						     <input type="hidden" name="blogId" value="{{blogId}}">
+						     <input type="hidden" name="commentId" value="{{commentId}}">
+						     <button type="button" class="btn btn-primary">Reply</button>
+					       </form>
+					     </div>
+						{{/showReply}}
+				    </div>
+				   </div>
+				{{/comments}}	
+			</script>
+	<script type="text/javascript">
+		 	$(document).ready(function(){
+		 		$("body").delegate("button[id^='approveComment']","click",function(){
+		 			var id = $(this).attr("id");
+		 			var commentId = id.split("-")[1];
+		 			var formId= "#updateCommentStatusFrm-"+commentId;
+		 			var statusId = "#commentStatus-"+commentId;
+		 			$(statusId).val("A");
+		 			$(formId).submit();
+		 		})
+		 		
+		 	 $("body").delegate("button[id^='rejectComment']","click",function(){
+		 			var id = $(this).attr("id");
+		 			var commentId = id.split("-")[1];
+		 			var formId= "#updateCommentStatusFrm-"+commentId;
+		 			var statusId = "#commentStatus-"+commentId;
+		 			$(statusId).val("R");
+		 			$(formId).submit();
+		 		})
+		 	})
+		 </script>
+
+	<script th:inline="javascript" type="text/javascript">
+		 	jQuery(document).ready(function(){
+				var commentData = {};
+				var template = $("#comment_template").html();
+				jQuery.get(/*[[@{/api/listAllComments}]]*/, function(data, status){
+					for (var i = 0; i < data.length; i++) {
+					    var comment = data[i];
+					    if(comment.status === 'M'){
+					    	comment["showApproveReject"]="true";
+					    }
+					    if(comment.status === 'A'){
+					    	comment["showReply"]="true";
+					    }
+					}
+					commentData["comments"] = data;
+			        var text = Mustache.render(template, commentData);
+			        $("#commentList").html(text);    
+			    });
+			});
+		</script>
+</body>
+</html>

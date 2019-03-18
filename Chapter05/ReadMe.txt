@@ -1,0 +1,1 @@
+The folder gdp contain JHipster code for running GDP application

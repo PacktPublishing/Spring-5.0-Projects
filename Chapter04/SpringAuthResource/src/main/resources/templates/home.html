@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="header :: jscssinclude"></head>
+	<body>
+		<div th:replace="header :: header_navigation"></div>
+		
+		<div class="card bg-white mb-3">
+		   <div class="card-body">
+			<h5 class="card-title">Home Page</h5>
+			<p class="card-text">Welcome, This is home page of the application</p>
+			<a th:href="@{/customAuth}">Authorize</a>
+			<!-- <form action="http://localhost:8080/springcustomauth/oauth/authorize" method="get">
+					<input type="hidden" name="username" value="c1">
+					<input type="hidden" name="password" value="123">
+					<input type="hidden" name="grant_type" value="implicit">
+					<input type="hidden" name="response_type" value="token">
+					<input type="hidden" name="client_id" value="c1">
+					<input type="submit" value="Custom Auth" name="customAuth">
+				</form> -->
+		   </div>
+		 </div>   
+	</body>
+</html>

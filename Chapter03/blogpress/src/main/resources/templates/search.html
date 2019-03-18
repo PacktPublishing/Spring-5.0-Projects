@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="header :: jscssinclude"></head>
+	<body>
+		<div th:replace="header :: header_navigation"></div>
+		   <div class="container">
+		   	   Showing search result for : <span th:text="${searchText}"></span>	
+			   <div class="blogpress-section" id="blogList">
+				 <div class="card bg-white mb-3" th:each="blog: ${blogSearchResultLst}">
+				   <div class="card-body">
+					<h5 class="card-title" th:text="${blog.title}">Title</h5>
+					<p class="card-text" th:text="${blog.body}">body</p>
+					 <form th:action="@{/viewBlog}" method="post">
+						<input type="hidden" name="blogId" th:value="${blog.id}">
+						<button type="submit" class="btn btn-primary">Read More ..</button>
+					 </form>
+				   </div>
+				   <div class="card-footer text-muted">
+					By : <b> <span th:text="${blog.createdBy}"></span></b> &nbsp; comments: <b><span th:text="${blog.commentSize}"></span></b> &nbsp; Published on <b><span th:text="${blog.publishDateForDisplay}"></span></b>
+				   </div>
+				 </div>
+			  </div>
+		</div>
+	</body>
+</html>

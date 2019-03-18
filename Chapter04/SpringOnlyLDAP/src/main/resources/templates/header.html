@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="jscssinclude">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/blogpress.css}">
+
+
+    <script th:src="@{/js/jquery.min.js}" type="text/javascript"></script>
+    <script th:src="@{/js/popper.js}" type="text/javascript"></script>
+    <script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+
+    <title th:text="${pageTitle}">Title</title>
+</head>
+
+<body>
+	<div th:fragment="header_navigation">
+		<div class="jumbotron text-center jumbotron-fluid" 
+				style="margin-bottom:0; padding:2rem 1 rem" >
+		     <h1>Only LDAP Authentication</h1>
+		     <p>Make the system secure ..!</p>
+		 </div>
+		 <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+	        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+	            <span class="navbar-toggler-icon"></span>
+	        </button>
+	        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+	            <ul class="navbar-nav mr-auto">
+	                <li class="nav-item">
+	                    <a class="nav-link" th:href="@{/}">Home</a>
+	                </li>
+	                <li class="nav-item" th:if="${validUserLogin == true}">
+	                    <a class="nav-link" th:href="@{/privatePage/}">Private Page</a>
+	                </li>
+	                <li class="nav-item" th:if="${validUserLogin == false}">
+	                    <a class="nav-link" th:href="@{/login/}">Login</a>
+	                </li>
+	            </ul>
+			     <span th:if="${validUserLogin} == true" class="mr-sm-2 text-white border rounded py-1 px-1">
+			    	Hello, <b th:text="${currentUserName}">User Name</b>
+                </span>
+			    <div id="logged-in-info" th:if="${validUserLogin} == true"> 
+					<form method="post" th:action="@{/logout}">
+						<button type="submit" class="btn" value="Logout">Logout</button>
+					</form>
+				</div>
+	        </div>
+	    </nav>
+    </div>
+</body>
+</html>

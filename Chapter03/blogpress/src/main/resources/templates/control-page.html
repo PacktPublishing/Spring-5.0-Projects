@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="header :: jscssinclude"></head>
+
+<body>
+    <div th:replace="header :: header_navigation">
+    </div>
+	<div class="col-sm-4" th:fragment="admin_navigation">
+		<h3>Control Panel Menu</h3>
+		<ul class="nav nav-pills flex-column bg-light">
+			<li class="nav-item">
+				<span class="nav-link active">Blogpress Administration</span>
+			</li>
+			<li class="nav-item">
+	          <a class="nav-link" th:href="@{/manageBlogs/}">Manage Blogs</a>
+	        </li>
+	        <li class="nav-item" th:if="${hasAdminRole == true}">
+	          <a class="nav-link" th:href="@{/showComments/}">Manage Comments</a>
+	        </li>
+	      </ul>
+	</div>  
+	 	
+</body>
+
+</html>
