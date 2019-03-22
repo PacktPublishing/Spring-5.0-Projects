@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{base}">
+
+<head>
+	<title>Edit [[${c.code}]] - [[${c.name}]] </title>
+</head>
+
+<div layout:fragment="page_content" id="page_content">
+	<nav aria-label="breadcrumb" role="navigation">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a th:href="@{/countries}">Countries</a></li>
+			<li class="breadcrumb-item active">
+				<a th:href="@{|/countries/${c.code}|}">[[${c.name}]]</a>
+			</li>
+			<li class="breadcrumb-item" aria-current="page">
+				[[|Editing ${c.name}(${c.code} / ${c.code2})|]]
+			</li>
+		</ol>
+	</nav>
+	<h1>
+		[[|Editing ${c.name}(${c.code} / ${c.code2})|]]
+	</h1>
+	<form class="form-horizontal" id="country-form" th:action="@{|/api/countries/${c.code}|}"
+		method="POST" th:object="${c}">
+		<input type="hidden" th:field="*{code}" />
+		<input type="hidden" th:field="*{code2}" />
+		<input type="hidden" th:field="*{gnp}" />
+		<div class="row">
+			<div class="col-md-4">
+				<label class="control-label required" for="name">Name</label>
+				<input type="text" class="form-control required" th:field="*{name}" id="name" />
+			</div>
+			<div class="col-md-4">
+				<label class="control-label required" for="localName">Local Name</label>
+				<input type="text" class="form-control required" th:field="*{localName}" id="localName" />
+			</div>
+			<div class="col-md-4">
+				<label class="control-label" for="capital.id">Capital</label>
+				<select class="form-control" th:field="*{capital.id}">
+					<option value=""></option>
+					<option th:each="cy : ${cities}" th:value="${cy.id}">[[${cy.name}]]</option>
+				</select>
+			</div>
+		</div>
+		<br />
+		<div class="row">
+			<div class="col-md-6">
+				<label class="control-label required" for="continent">Continent</label>
+				<select class="form-control required" th:field="*{continent}" id="continent">
+					<option value=""></option>
+					<option th:each="cons : ${continents}" th:value="${cons}">[[${cons}]]</option>
+				</select>
+			</div>
+			<div class="col-md-6">
+				<label class="control-label required" for="region">Region</label>
+				<select class="form-control required" th:field="*{region}" id="region">
+					<option value=""></option>
+					<option th:each="r : ${regions}" th:value="${r}">[[${r}]]</option>
+				</select>
+			</div>
+		</div>
+		<br />
+		<div class="row">
+			<div class="col-md-6">
+				<label class="control-label" for="headOfState">Head Of State</label>
+				<input class="form-control" th:field="*{headOfState}" id="headOfState" />
+			</div>
+			<div class="col-md-6">
+				<label class="control-label required" for="governmentForm">Government</label>
+				<select class="form-control required" th:field="*{governmentForm}" id="governmentForm">
+					<option value=""></option>
+					<option th:each="g : ${govs}" th:value="${g}">[[${g}]]</option>
+				</select>
+			</div>
+		</div>
+		<br />
+		<div class="row">
+			<div class="col-md-6">
+				<label class="control-label" for="indepYear">Independence</label>
+				<input type="text" class="form-control number" th:field="*{indepYear}" />
+			</div>
+			<div class="col-md-6">
+				<label class="control-label required" for="surfaceArea">Surface Area</label>
+				<input type="text" class="form-control required number" th:field="*{surfaceArea}" />
+			</div>
+		</div>
+		<br />
+		<div class="row">
+			<div class="col-md-6">
+				<label class="control-label required" for="population">Population</label>
+				<input type="text" class="form-control required number" th:field="*{population}" />
+			</div>
+			<div class="col-md-6">
+				<label class="control-label" for="lifeExpectancy">Life Expectancy</label>
+				<input type="text" class="form-control number" th:field="*{lifeExpectancy}" />
+			</div>
+		</div>
+		<br />
+		<div class="row justify-content-md-center">
+			<button type="button" id="cancel-form" class="btn btn-primary">
+				<i class="fa fa-arrow-left"></i> Cancel</button>&nbsp;
+			<button type="button" id="save-form" class="btn btn-success">
+				<i class="fa fa-plus"></i> Save</button>
+		</div>
+	</form>
+</div>
+
+<th:block layout:fragment="scripts">
+<script th:src="@{/static/js/country-form.js}"></script>
+</th:block>
+</html>

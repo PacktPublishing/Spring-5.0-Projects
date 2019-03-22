@@ -1,0 +1,3 @@
+com\nilangpatel\test\config\controller\api\CountryAPIControllerTest.class
+com\nilangpatel\test\external\WorldBankApiClientTest.class
+com\nilangpatel\test\config\controller\api\CountryLanguageAPIControllerTest.class
