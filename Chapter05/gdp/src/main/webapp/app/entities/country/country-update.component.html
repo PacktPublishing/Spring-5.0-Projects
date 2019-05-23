@@ -1,0 +1,152 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-country-heading" jhiTranslate="gdpApp.country.home.createOrEditLabel">Create or edit a Country</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!country.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="country.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gdpApp.country.code" for="field_code">Code</label>
+                    <input type="text" class="form-control" name="code" id="field_code"
+                        [(ngModel)]="country.code" required maxlength="3"/>
+                    <div [hidden]="!(editForm.controls.code?.dirty && editForm.controls.code?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.code?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.code?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 3 }">
+                        This field cannot be longer than 3 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gdpApp.country.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="country.name" required maxlength="52"/>
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 52 }">
+                        This field cannot be longer than 52 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gdpApp.country.continent" for="field_continent">Continent</label>
+                    <select class="form-control" name="continent" [(ngModel)]="country.continent" id="field_continent"  required>
+                        <option value="ASIA">{{'gdpApp.Continent.ASIA' | translate}}</option>
+                        <option value="EUROPE">{{'gdpApp.Continent.EUROPE' | translate}}</option>
+                        <option value="NORTH_AMERICA">{{'gdpApp.Continent.NORTH_AMERICA' | translate}}</option>
+                        <option value="AFRICA">{{'gdpApp.Continent.AFRICA' | translate}}</option>
+                        <option value="OCEANIA">{{'gdpApp.Continent.OCEANIA' | translate}}</option>
+                        <option value="ANTARCTICA">{{'gdpApp.Continent.ANTARCTICA' | translate}}</option>
+                        <option value="SOUTH_AMERICA">{{'gdpApp.Continent.SOUTH_AMERICA' | translate}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.continent?.dirty && editForm.controls.continent?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.continent?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gdpApp.country.region" for="field_region">Region</label>
+                    <input type="text" class="form-control" name="region" id="field_region"
+                        [(ngModel)]="country.region" required maxlength="26"/>
+                    <div [hidden]="!(editForm.controls.region?.dirty && editForm.controls.region?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.region?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.region?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 26 }">
+                        This field cannot be longer than 26 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gdpApp.country.surfaceArea" for="field_surfaceArea">Surface Area</label>
+                    <input type="number" class="form-control" name="surfaceArea" id="field_surfaceArea"
+                        [(ngModel)]="country.surfaceArea" required/>
+                    <div [hidden]="!(editForm.controls.surfaceArea?.dirty && editForm.controls.surfaceArea?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.surfaceArea?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.surfaceArea?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gdpApp.country.population" for="field_population">Population</label>
+                    <input type="number" class="form-control" name="population" id="field_population"
+                        [(ngModel)]="country.population" required/>
+                    <div [hidden]="!(editForm.controls.population?.dirty && editForm.controls.population?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.population?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.population?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gdpApp.country.lifeExpectancy" for="field_lifeExpectancy">Life Expectancy</label>
+                    <input type="number" class="form-control" name="lifeExpectancy" id="field_lifeExpectancy"
+                        [(ngModel)]="country.lifeExpectancy" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gdpApp.country.localName" for="field_localName">Local Name</label>
+                    <input type="text" class="form-control" name="localName" id="field_localName"
+                        [(ngModel)]="country.localName" required maxlength="45"/>
+                    <div [hidden]="!(editForm.controls.localName?.dirty && editForm.controls.localName?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.localName?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.localName?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 45 }">
+                        This field cannot be longer than 45 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gdpApp.country.governmentForm" for="field_governmentForm">Government Form</label>
+                    <input type="text" class="form-control" name="governmentForm" id="field_governmentForm"
+                        [(ngModel)]="country.governmentForm" required maxlength="45"/>
+                    <div [hidden]="!(editForm.controls.governmentForm?.dirty && editForm.controls.governmentForm?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.governmentForm?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.governmentForm?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 45 }">
+                        This field cannot be longer than 45 characters.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

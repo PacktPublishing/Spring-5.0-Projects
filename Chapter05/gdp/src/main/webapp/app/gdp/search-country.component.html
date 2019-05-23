@@ -1,0 +1,76 @@
+<h2 id="page-heading">
+    <span jhiTranslate="gdpApp.country.home.title">Country GDP</span>
+</h2>
+<br/>
+<form name="searchCountriesForm" novalidate (ngSubmit)="searchCountries()">
+    <div class="container mb-5">
+        <div class="row">
+            <div class="col-6">
+                <label class="form-control-label" jhiTranslate="gdpApp.country.name" for="nameFilter">Name</label>    
+                <input type="text" class="form-control" name="nameFilter" id="nameFilter" [(ngModel)]="nameFilter" maxlength="52"/>
+            </div>
+            <div class="col-4">
+                <label class="form-control-label" jhiTranslate="gdpApp.country.continent" for="continentFilter">Continent</label>
+                <select class="form-control" name="continentFilter" [(ngModel)]="continentFilter" id="continentFilter">
+                    <option value="">{{'gdpApp.Continent.ALL' | translate}}</option>
+                    <option value="ASIA">{{'gdpApp.Continent.ASIA' | translate}}</option>
+                    <option value="EUROPE">{{'gdpApp.Continent.EUROPE' | translate}}</option>
+                    <option value="NORTH_AMERICA">{{'gdpApp.Continent.NORTH_AMERICA' | translate}}</option>
+                    <option value="AFRICA">{{'gdpApp.Continent.AFRICA' | translate}}</option>
+                    <option value="OCEANIA">{{'gdpApp.Continent.OCEANIA' | translate}}</option>
+                    <option value="ANTARCTICA">{{'gdpApp.Continent.ANTARCTICA' | translate}}</option>
+                    <option value="SOUTH_AMERICA">{{'gdpApp.Continent.SOUTH_AMERICA' | translate}}</option>
+                </select>
+            </div>
+            <div class="col-2 align-self-end">
+                <label class="form-control-label" for="search-countries">&nbsp;</label>
+                <button type="submit" id="search-countries" class="btn btn-primary">
+                        <fa-icon [icon]="'search'"></fa-icon>&nbsp;<span>Search</span>
+                </button>
+            </div>    
+        </div>
+    </div>
+</form>    
+<div class="table-responsive" *ngIf="countries">
+    <table class="table table-striped">
+        <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+        <th jhiSortBy="code"><span jhiTranslate="gdpApp.country.code">Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+        <th jhiSortBy="name"><span jhiTranslate="gdpApp.country.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+        <th jhiSortBy="continent"><span jhiTranslate="gdpApp.country.continent">Continent</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+        <th jhiSortBy="region"><span jhiTranslate="gdpApp.country.region">Region</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+        <th jhiSortBy="surfaceArea"><span jhiTranslate="gdpApp.country.surfaceArea">Area</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+        <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let country of countries ;trackBy: trackId">
+            <td>{{country.code}}</td>
+            <td>{{country.name}}</td>
+            <td jhiTranslate="{{'gdpApp.Continent.' + country.continent}}">{{country.continent}}</td>
+            <td>{{country.region}}</td>
+            <td>{{country.surfaceArea}}</td>
+            <td class="text-right">
+                <div class="btn-group flex-btn-group-container">
+                    <button type="submit"
+                            [routerLink]="['/showGDP', country.id ]"
+                            class="btn btn-info btn-sm">
+                        <fa-icon [icon]="'eye'"></fa-icon>
+                        <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View GDP</span>
+                    </button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div *ngIf="countries && countries.length">
+    <div class="row justify-content-center">
+        <jhi-item-count [page]="page" [total]="queryCount"  [itemsPerPage]="itemsPerPage"></jhi-item-count>
+    </div>
+    <div class="row justify-content-center">
+        <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+    </div>
+</div>
+
+

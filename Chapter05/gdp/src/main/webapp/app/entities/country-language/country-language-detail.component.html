@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="countryLanguage">
+            <h2><span jhiTranslate="gdpApp.countryLanguage.detail.title">Country Language</span> {{countryLanguage.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="gdpApp.countryLanguage.language">Language</span></dt>
+                <dd>
+                    <span>{{countryLanguage.language}}</span>
+                </dd>
+                <dt><span jhiTranslate="gdpApp.countryLanguage.isOfficial">Is Official</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'gdpApp.TrueFalse.' + countryLanguage.isOfficial}}">{{countryLanguage.isOfficial}}</span>
+                </dd>
+                <dt><span jhiTranslate="gdpApp.countryLanguage.percentage">Percentage</span></dt>
+                <dd>
+                    <span>{{countryLanguage.percentage}}</span>
+                </dd>
+                <dt><span jhiTranslate="gdpApp.countryLanguage.country">Country</span></dt>
+                <dd>
+                    <div *ngIf="countryLanguage.countryId">
+                        <a [routerLink]="['/country', countryLanguage.countryId, 'view']">{{countryLanguage.countryName}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/country-language', countryLanguage.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

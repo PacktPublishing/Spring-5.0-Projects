@@ -1,0 +1,78 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="gdpApp.country.home.title">Countries</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-country" [routerLink]="['/country/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="gdpApp.country.home.createLabel">
+            Create new Country
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="countries">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="code"><span jhiTranslate="gdpApp.country.code">Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="name"><span jhiTranslate="gdpApp.country.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="continent"><span jhiTranslate="gdpApp.country.continent">Continent</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="region"><span jhiTranslate="gdpApp.country.region">Region</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="surfaceArea"><span jhiTranslate="gdpApp.country.surfaceArea">Surface Area</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="population"><span jhiTranslate="gdpApp.country.population">Population</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lifeExpectancy"><span jhiTranslate="gdpApp.country.lifeExpectancy">Life Expectancy</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="localName"><span jhiTranslate="gdpApp.country.localName">Local Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="governmentForm"><span jhiTranslate="gdpApp.country.governmentForm">Government Form</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let country of countries ;trackBy: trackId">
+                <td><a [routerLink]="['/country', country.id, 'view' ]">{{country.id}}</a></td>
+                <td>{{country.code}}</td>
+                <td>{{country.name}}</td>
+                <td jhiTranslate="{{'gdpApp.Continent.' + country.continent}}">{{country.continent}}</td>
+                <td>{{country.region}}</td>
+                <td>{{country.surfaceArea}}</td>
+                <td>{{country.population}}</td>
+                <td>{{country.lifeExpectancy}}</td>
+                <td>{{country.localName}}</td>
+                <td>{{country.governmentForm}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/country', country.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/country', country.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'country/'+ country.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="countries && countries.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

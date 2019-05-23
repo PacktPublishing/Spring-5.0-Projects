@@ -1,0 +1,72 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="gdpApp.countryLanguage.home.title">Country Languages</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-country-language" [routerLink]="['/country-language/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="gdpApp.countryLanguage.home.createLabel">
+            Create new Country Language
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="countryLanguages">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="language"><span jhiTranslate="gdpApp.countryLanguage.language">Language</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="isOfficial"><span jhiTranslate="gdpApp.countryLanguage.isOfficial">Is Official</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="percentage"><span jhiTranslate="gdpApp.countryLanguage.percentage">Percentage</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="countryName"><span jhiTranslate="gdpApp.countryLanguage.country">Country</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let countryLanguage of countryLanguages ;trackBy: trackId">
+                <td><a [routerLink]="['/country-language', countryLanguage.id, 'view' ]">{{countryLanguage.id}}</a></td>
+                <td>{{countryLanguage.language}}</td>
+                <td jhiTranslate="{{'gdpApp.TrueFalse.' + countryLanguage.isOfficial}}">{{countryLanguage.isOfficial}}</td>
+                <td>{{countryLanguage.percentage}}</td>
+                <td>
+                    <div *ngIf="countryLanguage.countryId">
+                        <a [routerLink]="['../country', countryLanguage.countryId , 'view' ]" >{{countryLanguage.countryName}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/country-language', countryLanguage.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/country-language', countryLanguage.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'country-language/'+ countryLanguage.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="countryLanguages && countryLanguages.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

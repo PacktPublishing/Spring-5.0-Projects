@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="city">
+            <h2><span jhiTranslate="gdpApp.city.detail.title">City</span> {{city.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="gdpApp.city.name">Name</span></dt>
+                <dd>
+                    <span>{{city.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="gdpApp.city.distrct">Distrct</span></dt>
+                <dd>
+                    <span>{{city.distrct}}</span>
+                </dd>
+                <dt><span jhiTranslate="gdpApp.city.population">Population</span></dt>
+                <dd>
+                    <span>{{city.population}}</span>
+                </dd>
+                <dt><span jhiTranslate="gdpApp.city.country">Country</span></dt>
+                <dd>
+                    <div *ngIf="city.countryId">
+                        <a [routerLink]="['/country', city.countryId, 'view']">{{city.countryName}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/city', city.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
