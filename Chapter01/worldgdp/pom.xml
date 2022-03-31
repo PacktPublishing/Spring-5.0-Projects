@@ -13,7 +13,7 @@
 		<lombok.version>1.16.18</lombok.version>
 		<hibernate.validator.version>6.0.2.Final</hibernate.validator.version>
 		<mysql.jdbc.driver.version>5.1.44</mysql.jdbc.driver.version>
-		<spring.version>5.1.5.RELEASE</spring.version>
+		<spring.version>5.3.18</spring.version>
 		<hikari.version>2.7.2</hikari.version>
 		<junit.version>4.12</junit.version>
 		<assertj.version>3.12.0</assertj.version>
