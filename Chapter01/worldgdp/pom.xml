@@ -17,7 +17,7 @@
 		<hikari.version>2.7.2</hikari.version>
 		<junit.version>4.12</junit.version>
 		<assertj.version>3.12.0</assertj.version>
-		<h2.version>1.4.198</h2.version>
+		<h2.version>2.1.210</h2.version>
 		<jackson.version>2.9.2</jackson.version>
 		<thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
 		<thymeleaf-layout-dialect.version>2.2.1</thymeleaf-layout-dialect.version>
